@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping List</title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+
+</style>
+</head>
+<body>
+
+  <h1>My Dynamic Shopping List</h1>
+
+  <div class="form">
+    <input type="text" id="myInput" placeholder="Item...">
+    <button onclick="newElement()">Add</button>
+  </div>
+
+  <ul id="myUL"></ul>
+
+  <script>
+    function newElement() {
+      var input = document.getElementById("myInput");
+      var inputValue = input.value.trim();
+
+      if (inputValue === '') {
+        alert("You gotta type something here dawg.");
+        return;
+      }
+
+      var li = document.createElement("li");
+      li.textContent = inputValue;
+
+      var closeBtn = document.createElement("button");
+      closeBtn.textContent = "\u00D7";
+      closeBtn.className = "close";
+      closeBtn.onclick = function() {
+        var div = this.parentElement;
+        div.style.display = "none";
+      };
+
+      li.appendChild(closeBtn);
+      document.getElementById("myUL").appendChild(li);
+
+      input.value = '';
+    }
+
+    document.getElementById("myUL").addEventListener("click", function(event) {
+      if (event.target.classList.contains("close")) {
+        var div = event.target.parentElement;
+        div.style.display = "none";
+      }
+    });
+  </script>
+
+</body>
+</html>
